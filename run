@@ -1,0 +1,6 @@
+printf "[ %s ] " "$(basename "$(pwd)")"
+if sh ../changed; then
+  echo "unchanged"
+else
+  sh ../set_to && echo "--- Ok ---" || echo "--- FAILED! ---"
+fi

@@ -1,0 +1,31 @@
+NEW_IP="$1"
+if [ -z "$NEW_IP" ]; then
+  echo "Getting IP..."
+  NEW_IP="$(sh ./ip || echo NONZERO_EXIT_CODE)"
+  if [ "$NEW_IP" != "NONZERO_EXIT_CODE" ]; then
+    printf "Got IP"
+  else
+    echo "Got nonzero exit code, exiting"
+    exit 1
+  fi
+else
+  printf "Passed IP"
+fi
+if [ -z "$NEW_IP" ]; then
+  echo " <empty>! provide your IP as an argument to set_to or fix the ./ip script"
+  exit 1
+fi
+printf " %s" "$NEW_IP"
+source ./settings || exit 1
+echo ", updating DNS record $RECORD_NAME..."
+curl "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records/$DNS_RECORD_ID" \
+  -X PATCH \
+  -H 'Content-Type: application/json' \
+  -H '@./auth' \
+  -d '{
+    "content": "'"$NEW_IP"'",
+    "name": "'"$RECORD_NAME"'",
+    "proxied": '"$RECORD_PROXIED"',
+    "ttl": '"$RECORD_TTL"',
+    "type": "'"$RECORD_TYPE"'"
+  }' || exit 1

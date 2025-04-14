@@ -1,0 +1,4 @@
+Authorization: Bearer <an api token>
+---- OR ----
+X-Auth-Email: <email>
+X-Auth-Key: <an api key>

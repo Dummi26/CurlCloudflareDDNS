@@ -1,0 +1,6 @@
+export ZONE_ID=<cloudflare zone id>
+export DNS_RECORD_ID=<cloudflare dns record id>
+export RECORD_NAME=<domain.tld / sub.domain.tld>
+export RECORD_PROXIED=true
+export RECORD_TTL=120
+export RECORD_TYPE=A

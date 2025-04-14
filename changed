@@ -1,0 +1,15 @@
+RAND_NUM="$RANDOM"
+CHECK_OUTPUT="$(sh ./check "$RAND_NUM" || echo NONZERO_EXIT_CODE)"
+IS_OK=no
+for i in $CHECK_OUTPUT; do
+  if [ "$i" != "$RAND_NUM" ]; then
+    echo "got $i, expected $RAND_NUM"
+    exit 1
+  else
+    IS_OK=yes
+  fi
+done
+if [ "$IS_OK" != "yes" ]; then
+  echo "got nothing, expected at least one $RAND_NUM"
+  exit 1
+fi

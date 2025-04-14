@@ -1,0 +1,10 @@
+# To always update your DNS record, uncomment
+# exit 1
+
+# requires configuration of your http server:
+# `GET /curl_cloudflare_ddns_rand_num/*` requests *must* cause responses
+# of the contents of the file `/tmp/curl_cloudflare_ddns_rand_num/*`!
+# Also, if your config redirects HTTP to HTTPS requests, change to https://
+mkdir -p /tmp/curl_cloudflare_ddns_rand_num/
+echo "$1" > /tmp/curl_cloudflare_ddns_rand_num/example
+curl "http://<domain>/curl_cloudflare_ddns_rand_num/example" || exit 1
