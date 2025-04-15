@@ -2,7 +2,7 @@
 
 A simple way to update cloudflare DNS records automatically using just `sh` and `curl`
 
-Requires `sh` and `curl` in `$PATH`, DNS records need to exist.
+Requires `sh`, `shuf` and `curl` in `$PATH`, DNS records need to exist.
 
 ## Configuring
 

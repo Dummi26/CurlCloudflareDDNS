@@ -16,7 +16,7 @@ if [ -z "$NEW_IP" ]; then
   exit 1
 fi
 printf " %s" "$NEW_IP"
-source ./settings || exit 1
+. ./settings || exit 1
 echo ", updating DNS record $RECORD_NAME..."
 curl "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records/$DNS_RECORD_ID" \
   -X PATCH \
